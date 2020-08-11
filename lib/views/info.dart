@@ -1,3 +1,4 @@
+import 'package:barcode_scanner_v3/views/cart.dart';
 import 'package:flutter/material.dart';
 
 class Information extends StatelessWidget {
@@ -11,7 +12,7 @@ class Information extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Item Info'),
+        title: Text('Item Information'),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
@@ -57,10 +58,29 @@ class Information extends StatelessWidget {
                     ),
                     textAlign: TextAlign.end,
                   ),
+                  RaisedButton(
+                    onPressed: () {
+                      Cart(title, brand);
+                    },
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.shopping_cart),
+                        Text('Add To Cart',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ]),
       ),
     );

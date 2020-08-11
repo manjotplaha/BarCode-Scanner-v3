@@ -1,9 +1,7 @@
-import 'package:barcode_scanner_v3/info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import './services/article_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -50,17 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
   String title;
   String brand;
   String category;
-  String _scanBarcode = 'Unknown';
+  String scanBarcode = 'Unknown';
   @override
   void initState() {
-    lookUp();
     super.initState();
-  }
-
-  startBarcodeScanStream() async {
-    FlutterBarcodeScanner.getBarcodeStreamReceiver(
-            "#ff6666", "Cancel", true, ScanMode.BARCODE)
-        .listen((barcode) => print(barcode));
   }
 
   Future<void> scanBarcodeNormal() async {
@@ -80,33 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
     if (!mounted) return;
 
     setState(() {
-      _scanBarcode = barcodeScanRes;
-      lookUp();
+      scanBarcode = barcodeScanRes;
+      lookUp(scanBarcode);
     });
-  }
-
-  Future<String> lookUp() async {
-    String url =
-        'https://api.upcitemdb.com/prod/trial/lookup?upc=$_scanBarcode';
-    try {
-      http.Response response = await http.get(url);
-      final convertDataToJson = json.decode(response.body);
-      extractedData = convertDataToJson['items'];
-      title = extractedData[0]['title'];
-      brand = extractedData[0]['brand'];
-      category = extractedData[0]['category'];
-      print(json.decode(response.body));
-      print(extractedData[0]['title']);
-      setState(() {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Information(title, brand, category)));
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-    return 'Success';
   }
 
   @override
@@ -128,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                   onPressed: () => scanBarcodeNormal(),
                   child: Text("Start barcode scan")),
-              Text('Scan result : $_scanBarcode\n',
+              Text('Scan result : $scanBarcode\n',
                   style: TextStyle(fontSize: 20)),
               FlatButton(onPressed: null, child: null)
             ]),
