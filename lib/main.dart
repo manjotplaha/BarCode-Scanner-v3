@@ -1,7 +1,7 @@
+import 'package:barcode_scanner_v3/views/info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import './services/article_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,7 +44,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List extractedData;
   String title;
   String brand;
   String category;
@@ -70,9 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() {
+    setState(() async {
       scanBarcode = barcodeScanRes;
-      lookUp(scanBarcode);
+      // await lookUp(scanBarcode);
+      // print(object)
+
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Information(scanBarcode)));
     });
   }
 
