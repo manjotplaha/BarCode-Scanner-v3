@@ -74,9 +74,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // await lookUp(scanBarcode);
       // print(object)
 
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Information(scanBarcode)));
+      _modalBottomSheetInformation();
+
+      // Navigator.push(context,
+      //     MaterialPageRoute(builder: (context) => Information(scanBarcode)));
     });
+  }
+
+  Future _modalBottomSheetInformation() {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) => Information(scanBarcode),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        backgroundColor: Colors.white);
   }
 
   @override

@@ -3,9 +3,9 @@ import 'package:barcode_scanner_v3/models/info_model.dart';
 import 'package:http/http.dart';
 
 Future<Article> lookUp(_scanBarcode) async {
-  String url = 'https://api.upcitemdb.com/prod/trial/lookup?upc=$_scanBarcode';
-  // String url =
-  // 'https://api.upcitemdb.com/prod/trial/lookup?upc=0885909950805'; //for testin api
+  // String url = 'https://api.upcitemdb.com/prod/trial/lookup?upc=$_scanBarcode';
+  String url =
+      'https://api.upcitemdb.com/prod/trial/lookup?upc=0885909950805'; //for testin api
   print('bar code from service ' + _scanBarcode);
   Article article = null;
   try {
