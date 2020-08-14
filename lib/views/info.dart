@@ -1,6 +1,8 @@
+import 'package:barcode_scanner_v3/models/cart_model.dart';
 import 'package:barcode_scanner_v3/models/info_model.dart';
 import 'package:barcode_scanner_v3/services/article_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Information extends StatelessWidget {
   final String barCode;
@@ -55,26 +57,30 @@ class Information extends StatelessWidget {
                         textAlign: TextAlign.end,
                         style: contentsStyling(),
                       ),
-                      RaisedButton(
-                        onPressed: () {},
-                        color: Colors.red,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0)),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(Icons.shopping_cart),
-                            Text(
-                              'Add To Cart',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
+                      ButtonBar(children: [
+                        RaisedButton(
+                          onPressed: () {
+                            Provider.of<Cart>(context).add(snapshot.data);
+                          },
+                          color: Colors.red,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(Icons.shopping_cart),
+                              Text(
+                                'Add To Cart',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                      ])
                     ]));
           } else {
             CircularProgressIndicator();
