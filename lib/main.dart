@@ -1,7 +1,9 @@
+import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
 import 'package:barcode_scanner_v3/views/info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,30 +12,33 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: 'Quicksand',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-                button: TextStyle(color: Colors.white),
-              ),
-          appBarTheme: AppBarTheme(
+    return ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+            primarySwatch: Colors.deepOrange,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            fontFamily: 'Quicksand',
             textTheme: ThemeData.light().textTheme.copyWith(
                   title: TextStyle(
                     fontFamily: 'OpenSans',
-                    fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
+                  button: TextStyle(color: Colors.white),
                 ),
-          )),
-      home: MyHomePage(),
+            appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                    title: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+            )),
+        home: MyHomePage(),
+      ),
     );
   }
 }

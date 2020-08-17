@@ -1,13 +1,16 @@
+import 'package:barcode_scanner_v3/models/info_model.dart';
 import 'package:flutter/material.dart';
-import './info_model.dart';
 
-class Cart extends ChangeNotifier {
+class CartProvider extends ChangeNotifier {
   List<Article> _cartArticles = [];
+
+  // get ccart => cartItems;
 
   // double _totalPrice = 0.0;
 
   void add(Article item) {
     _cartArticles.add(item);
+    print(_cartArticles);
     // _totalPrice += item.price;
     notifyListeners();
   }
@@ -19,6 +22,7 @@ class Cart extends ChangeNotifier {
   }
 
   int get count {
+    notifyListeners();
     return _cartArticles.length;
   }
 
@@ -27,6 +31,6 @@ class Cart extends ChangeNotifier {
   // }
 
   List<Article> get cartItems {
-    return _cartArticles;
+    return [..._cartArticles];
   }
 }
