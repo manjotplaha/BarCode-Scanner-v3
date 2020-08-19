@@ -1,7 +1,6 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
 import 'package:barcode_scanner_v3/models/info_model.dart';
 import 'package:barcode_scanner_v3/services/article_service.dart';
-import 'package:barcode_scanner_v3/views/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
