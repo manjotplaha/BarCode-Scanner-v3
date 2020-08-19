@@ -1,27 +1,46 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
+import 'package:barcode_scanner_v3/widgets/bars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // var ccart = Provider.of<Cart>(context);
+    var cartItem = Provider.of<CartProvider>(context).cartItems;
     return Scaffold(
-      appBar: AppBar(title: Text('Cart View')),
-      body: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: ListView.builder(
-            itemCount: Provider.of<CartProvider>(context).cartItems.length,
-            itemBuilder: (context, builder) {
-              return Card(
-                  child: ListTile(
-                      leading:
-                          Text('${Provider.of<CartProvider>(context).cartItems}'
-                              // 'Article Title',
-
-                              )));
-            }),
-      ),
+      appBar: buildAppBar(context, 'CartView'),
+      body: cartItem.isEmpty
+          ? Center(
+              child: Text(
+              'Add Something to your Cart !',
+              style: Theme.of(context).textTheme.title,
+            ))
+          : ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: ListView.builder(
+                  itemCount:
+                      Provider.of<CartProvider>(context).cartItems.length,
+                  itemBuilder: (context, i) {
+                    return Card(
+                      child: ListTile(
+                        title: Text('${cartItem[i].items[0].title}'),
+                        subtitle: Text('${cartItem[i].items[0].upc}'),
+                        trailing: FittedBox(
+                          child: ButtonBar(children: [
+                            IconButton(
+                                icon: Icon(Icons.remove_circle_outline),
+                                onPressed: null),
+                            Text(('1')),
+                            IconButton(
+                                icon: Icon(Icons.add_circle_outline),
+                                onPressed: null)
+                          ]),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

@@ -31,6 +31,7 @@ dependencies:
   flutter_barcode_scanner: ^1.0.1
   http:
   provider:
+  convex_bottom_bar:
 
 dev_dependencies:
   flutter_test:

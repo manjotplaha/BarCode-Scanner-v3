@@ -31,6 +31,6 @@ class CartProvider extends ChangeNotifier {
   // }
 
   List<Article> get cartItems {
-    return [..._cartArticles];
+    return _cartArticles;
   }
 }

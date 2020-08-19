@@ -66,10 +66,7 @@ class Information extends StatelessWidget {
                           },
                           child: RaisedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CartView()));
+                              Navigator.pushNamed(context, '/cart');
                               Provider.of<CartProvider>(context)
                                   .add(snapshot.data);
                             },

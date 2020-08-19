@@ -1,5 +1,7 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
+import 'package:barcode_scanner_v3/views/cart.dart';
 import 'package:barcode_scanner_v3/views/info.dart';
+import 'package:barcode_scanner_v3/widgets/bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Quicksand',
             textTheme: ThemeData.light().textTheme.copyWith(
                   title: TextStyle(
-                    fontFamily: 'OpenSans',
+                    fontFamily: 'Quicksand',
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -31,13 +33,17 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
                     title: TextStyle(
-                      fontFamily: 'OpenSans',
+                      fontFamily: 'Quicksand',
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
             )),
-        home: MyHomePage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MyHomePage(),
+          '/cart': (context) => CartView()
+        },
       ),
     );
   }
@@ -76,13 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() async {
       scanBarcode = barcodeScanRes;
-      // await lookUp(scanBarcode);
-      // print(object)
 
       _modalBottomSheetInformation();
-
-      // Navigator.push(context,
-      //     MaterialPageRoute(builder: (context) => Information(scanBarcode)));
     });
   }
 
@@ -99,27 +100,22 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'BarCode Scanner',
-          style: Theme.of(context).textTheme.title,
+        appBar: buildAppBar(context, 'BarCode Scanner'),
+        body: Container(
+          width: double.infinity,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text('Here Goes the Scannner'),
+                RaisedButton(
+                    onPressed: () => scanBarcodeNormal(),
+                    child: Text("Start barcode scan")),
+                Text('Scan result : $scanBarcode\n',
+                    style: TextStyle(fontSize: 20)),
+                FlatButton(onPressed: null, child: null)
+              ]),
         ),
-      ),
-      body: Container(
-        width: double.infinity,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text('Here Goes the Scannner'),
-              RaisedButton(
-                  onPressed: () => scanBarcodeNormal(),
-                  child: Text("Start barcode scan")),
-              Text('Scan result : $scanBarcode\n',
-                  style: TextStyle(fontSize: 20)),
-              FlatButton(onPressed: null, child: null)
-            ]),
-      ),
-    );
+        bottomNavigationBar: BottomNavBar());
   }
 }
