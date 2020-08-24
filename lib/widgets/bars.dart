@@ -15,7 +15,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return ConvexAppBar(
       height: 45,
-      style: TabStyle.fixedCircle, backgroundColor: Colors.deepOrangeAccent,
+      style: TabStyle.fixedCircle, backgroundColor: Colors.teal[900],
       items: [
         TabItem(icon: Icons.shopping_cart, title: 'Cart'),
         TabItem(icon: Icons.add, title: 'Add'),
