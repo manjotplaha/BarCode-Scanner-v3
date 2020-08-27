@@ -29,7 +29,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           });
         } else if (i == 1) {
           setState(() {
-            Navigator.pushNamed(context, '/');
+            Navigator.pushNamed(context, '/home');
           });
         }
       },

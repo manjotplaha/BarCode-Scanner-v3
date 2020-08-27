@@ -68,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("Start barcode scan")),
                 Text('Scan result : $scanBarcode\n',
                     style: TextStyle(fontSize: 20)),
-                FlatButton(onPressed: null, child: null)
               ]),
         ),
         bottomNavigationBar: BottomNavBar());

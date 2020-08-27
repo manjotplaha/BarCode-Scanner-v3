@@ -32,7 +32,8 @@ dependencies:
   http:
   provider:
   convex_bottom_bar:
-  
+  flutter_signin_button: ^1.0.0
+  google_fonts: ^1.1.0
 
 dev_dependencies:
   flutter_test:
