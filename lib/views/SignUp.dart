@@ -1,3 +1,4 @@
+import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,18 +61,18 @@ class _SignUpState extends State<SignUp> {
                               controller: passWordController,
                               obscureText: true,
                               icon: Icon(Icons.lock)),
-                          SizedBox(height: 5),
-                          Text(
-                            'Phone No.',
-                            style: TextStyle(color: textColor),
-                          ),
-                          SizedBox(height: 5),
-                          CustomTextField(
-                            controller: phoneNoController,
-                            obscureText: false,
-                            icon: Icon(Icons.phone),
-                            keyboardType: TextInputType.number,
-                          ),
+                          // SizedBox(height: 5),
+                          // Text(
+                          //   'Phone No.',
+                          //   style: TextStyle(color: textColor),
+                          // ),
+                          // SizedBox(height: 5),
+                          // CustomTextField(
+                          //   controller: phoneNoController,
+                          //   obscureText: false,
+                          //   icon: Icon(Icons.phone),
+                          //   keyboardType: TextInputType.number,
+                          // ),
                         ]),
                   ),
                 ),
@@ -100,11 +101,9 @@ class _SignUpState extends State<SignUp> {
                 ),
                 SignInButton(
                   Buttons.Google,
-                  onPressed: () {},
-                ),
-                SignInButton(
-                  Buttons.Facebook,
-                  onPressed: () {},
+                  onPressed: () {
+                    AuthService().signInWithGoogle();
+                  },
                 ),
                 SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [

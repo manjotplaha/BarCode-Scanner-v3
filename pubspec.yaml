@@ -34,6 +34,14 @@ dependencies:
   convex_bottom_bar:
   flutter_signin_button: ^1.0.0
   google_fonts: ^1.1.0
+  firebase_core: "0.5.0"
+  cloud_firestore:
+  firebase_auth:
+  google_sign_in: "^4.5.1"
+
+  firebase_analytics:
+  firebase_crashlytics:
+  firebase_performance:
 
 dev_dependencies:
   flutter_test:

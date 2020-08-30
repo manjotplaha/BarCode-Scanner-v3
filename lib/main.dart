@@ -2,10 +2,13 @@ import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
 import 'package:barcode_scanner_v3/views/cart.dart';
 import 'package:barcode_scanner_v3/views/first_page.dart';
 import 'package:barcode_scanner_v3/views/home.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

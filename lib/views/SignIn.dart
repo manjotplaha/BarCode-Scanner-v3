@@ -98,10 +98,6 @@ class _SignInState extends State<SignIn> {
                     Navigator.pushNamed(context, '/home');
                   },
                 ),
-                SignInButton(
-                  Buttons.Facebook,
-                  onPressed: () {},
-                ),
                 SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(

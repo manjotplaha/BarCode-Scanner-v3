@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class TextButton extends StatelessWidget {
   const TextButton({
@@ -39,10 +38,12 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       keyboardType: keyboardType,
       controller: controller,
       obscureText: obscureText,
+      validator: (value) => value.isEmpty ? 'Email cannot be empty' : null,
+      // onSaved: (value) => email = value.trim(),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
         prefixIcon: icon,
@@ -62,20 +63,20 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomButton extends StatefulWidget {
-  const CustomButton({
-    Key key,
-    @required this.title,
-    @required this.screen,
-  }) : super(key: key);
+  const CustomButton(
+      {Key key, @required this.title, @required this.screen, this.methodName})
+      : super(key: key);
 
   final String title;
   final screen;
+  final Future<dynamic> methodName;
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
 }
 
 class _CustomButtonState extends State<CustomButton> {
+  // final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,6 +89,7 @@ class _CustomButtonState extends State<CustomButton> {
         child: GestureDetector(
           onTap: () {
             print('tapped');
+            widget.methodName;
             setState(() {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => widget.screen));

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "280123204821",
+    "firebase_url": "https://inventra-e8f8b.firebaseio.com",
+    "project_id": "inventra-e8f8b",
+    "storage_bucket": "inventra-e8f8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280123204821:android:43988bcbc04e70fd5a6e5c",
+        "android_client_info": {
+          "package_name": "com.plaha.barcode_scanner_v3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280123204821-dcshp1vl5d298j3mkqe7ok0ffjq6p2qj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plaha.barcode_scanner_v3",
+            "certificate_hash": "0b233acf8e1a775ac054ed44ccf8252c49b0fea6"
+          }
+        },
+        {
+          "client_id": "280123204821-kjdc15aaeh2tt595roo78g9ta0a1oc26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6HX9XvpjfkXQ2bevDA5BxxCJqRbCYyLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280123204821-kjdc15aaeh2tt595roo78g9ta0a1oc26.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
