@@ -1,4 +1,5 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
+import 'package:barcode_scanner_v3/Wrapper.dart';
 import 'package:barcode_scanner_v3/views/cart.dart';
 import 'package:barcode_scanner_v3/views/first_page.dart';
 import 'package:barcode_scanner_v3/views/home.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             fontFamily: 'Quicksand',
             textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
+                  headline6: TextStyle(
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                 ),
             appBarTheme: AppBarTheme(
               textTheme: ThemeData.dark().textTheme.copyWith(
-                    title: TextStyle(
+                    headline6: TextStyle(
                       fontFamily: 'Quicksand',
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
             )),
         initialRoute: '/',
         routes: {
-          '/': (context) => FirstPage(),
+          '/': (context) => Wrapper(),
+          '/firstPage': (context) => FirstPage(),
           '/home': (context) => MyHomePage(),
           '/cart': (context) => CartView()
         },

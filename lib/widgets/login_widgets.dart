@@ -39,6 +39,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onSaved: (String value) {},
       keyboardType: keyboardType,
       controller: controller,
       obscureText: obscureText,
@@ -62,7 +63,7 @@ class CustomTextField extends StatelessWidget {
   }
 }
 
-class CustomButton extends StatefulWidget {
+class CustomButton extends StatelessWidget {
   const CustomButton(
       {Key key, @required this.title, @required this.screen, this.methodName})
       : super(key: key);
@@ -71,12 +72,6 @@ class CustomButton extends StatefulWidget {
   final screen;
   final Future<dynamic> methodName;
 
-  @override
-  _CustomButtonState createState() => _CustomButtonState();
-}
-
-class _CustomButtonState extends State<CustomButton> {
-  // final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,18 +82,22 @@ class _CustomButtonState extends State<CustomButton> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: GestureDetector(
-          onTap: () {
+          onTap: () async {
             print('tapped');
-            widget.methodName;
-            setState(() {
+
+            dynamic result = await methodName;
+            if (result == null) {
+              print('Error Signing in');
+            } else {
+              print('Signed in');
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => widget.screen));
-            });
+                  .push(MaterialPageRoute(builder: (_) => screen));
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('${widget.title}',
+              Text('$title',
                   style: GoogleFonts.varelaRound(
                     color: Colors.yellow[200],
                     fontSize: 20,

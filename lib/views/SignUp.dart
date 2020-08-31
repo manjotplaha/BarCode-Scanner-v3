@@ -12,7 +12,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passWordController = TextEditingController();
-  final phoneNoController = TextEditingController();
   final Color primaryColor = Colors.cyan[800];
 
   final Color secondaryColor = Color(0xff232c51);
@@ -58,21 +57,10 @@ class _SignUpState extends State<SignUp> {
                           ),
                           SizedBox(height: 5),
                           CustomTextField(
-                              controller: passWordController,
-                              obscureText: true,
-                              icon: Icon(Icons.lock)),
-                          // SizedBox(height: 5),
-                          // Text(
-                          //   'Phone No.',
-                          //   style: TextStyle(color: textColor),
-                          // ),
-                          // SizedBox(height: 5),
-                          // CustomTextField(
-                          //   controller: phoneNoController,
-                          //   obscureText: false,
-                          //   icon: Icon(Icons.phone),
-                          //   keyboardType: TextInputType.number,
-                          // ),
+                            controller: passWordController,
+                            obscureText: true,
+                            icon: Icon(Icons.lock),
+                          ),
                         ]),
                   ),
                 ),

@@ -2,7 +2,7 @@ import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/views/SignIn.dart';
 import 'package:barcode_scanner_v3/views/SignUp.dart';
 import 'package:barcode_scanner_v3/views/home.dart';
-import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
+// import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -43,18 +43,134 @@ class FirstPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                  CustomButton(
-                    title: 'SIGN IN',
-                    screen: SignIn(),
-                  ),
+                  // CustomButton(
+                  //   title: 'SIGN IN',
+                  //   screen: SignIn(),
+                  //   methodName: null,
+                  // ),
+                  Container(
+                      width: 800,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.yellow[200]),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: GestureDetector(
+                        onTap: () async {
+                          print('SIGN IN tapped');
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => SignIn()));
+
+                          // dynamic result = await methodName;
+                          // if (result == null) {
+                          //   print('Error Signing in');
+                          // } else {
+                          //   print('Signed in');
+                          //   Navigator.of(context)
+                          //       .push(MaterialPageRoute(builder: (_) => screen));
+                          // }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('SIGN IN',
+                                style: GoogleFonts.varelaRound(
+                                  color: Colors.yellow[200],
+                                  fontSize: 20,
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.orange[200],
+                            )
+                          ],
+                        ),
+                      )),
                   SizedBox(height: 10),
-                  CustomButton(title: 'SIGN UP', screen: SignUp()),
+                  // CustomButton(title: 'SIGN UP', screen: SignUp()),
+                  Container(
+                      width: 800,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.yellow[200]),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: GestureDetector(
+                        onTap: () async {
+                          print('SIGN UP tapped');
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => SignUp()));
+
+                          // dynamic result = await methodName;
+                          // if (result == null) {
+                          //   print('Error Signing in');
+                          // } else {
+                          //   print('Signed in');
+                          //   Navigator.of(context)
+                          //       .push(MaterialPageRoute(builder: (_) => SignUp()));
+                          // }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('SIGN UP',
+                                style: GoogleFonts.varelaRound(
+                                  color: Colors.yellow[200],
+                                  fontSize: 20,
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.orange[200],
+                            )
+                          ],
+                        ),
+                      )),
                   SizedBox(height: 10),
-                  CustomButton(
-                    title: 'Continue as Guest',
-                    screen: MyHomePage(),
-                    methodName: _auth.signInAnon(),
-                  ),
+
+                  Container(
+                      width: 800,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.yellow[200]),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: GestureDetector(
+                        onTap: () async {
+                          print('tapped');
+
+                          dynamic result = await _auth.signInAnon();
+                          print(result);
+                          if (result == null) {
+                            print('Error Signing in');
+                          } else {
+                            print('Signed in');
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => MyHomePage()));
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Continue as Guest',
+                                style: GoogleFonts.varelaRound(
+                                  color: Colors.yellow[200],
+                                  fontSize: 20,
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.orange[200],
+                            )
+                          ],
+                        ),
+                      )),
                 ],
               ),
             ),

@@ -41,7 +41,7 @@ AppBar buildAppBar(BuildContext context, String pageTitle) {
   return AppBar(
     title: Text(
       '$pageTitle',
-      style: Theme.of(context).textTheme.title,
+      style: Theme.of(context).textTheme.headline6,
     ),
     actions: <Widget>[
       PopupMenuButton(

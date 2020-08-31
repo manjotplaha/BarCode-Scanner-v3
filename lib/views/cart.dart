@@ -13,7 +13,7 @@ class CartView extends StatelessWidget {
           ? Center(
               child: Text(
               'Add Something to your Cart !',
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ))
           : ClipRRect(
               borderRadius: BorderRadius.circular(10.0),

@@ -1,3 +1,5 @@
+import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/views/home.dart';
 import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,13 +11,21 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  AuthService _auth = new AuthService();
+  final _formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passWordController = TextEditingController();
+
   final Color primaryColor = Colors.cyan[800];
 
   final Color secondaryColor = Color(0xff232c51);
 
   final Color textColor = Colors.brown[50];
+
+  String email = '';
+  String passwd = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -37,44 +47,127 @@ class _SignInState extends State<SignIn> {
                   margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Email',
-                            style: TextStyle(color: textColor),
-                          ),
-                          SizedBox(height: 10),
-                          CustomTextField(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //email text field
+                            Text(
+                              'Email',
+                              style: TextStyle(color: textColor),
+                            ),
+                            SizedBox(height: 10),
+
+                            TextFormField(
+                              onChanged: (String value) {
+                                setState(() {
+                                  email = value;
+                                });
+                              },
+                              // keyboardType: ,
                               controller: emailController,
                               obscureText: false,
-                              icon: Icon(Icons.email)),
-                          SizedBox(height: 10),
-                          Text(
-                            'Password',
-                            style: TextStyle(color: textColor),
-                          ),
-                          SizedBox(height: 10),
-                          CustomTextField(
+                              validator: (value) => value.isEmpty
+                                  ? 'Email cannot be empty'
+                                  : null,
+                              // onChanged: (value) => email = value.trim(),
+                              decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                prefixIcon: Icon(Icons.email),
+                                filled: true,
+                                fillColor: Colors.white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12.0)),
+                                  borderSide: BorderSide(
+                                      color: Colors.brown[100], width: 2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide:
+                                      BorderSide(color: Colors.brown[100]),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+
+                            //password text field
+
+                            Text(
+                              'Password',
+                              style: TextStyle(color: textColor),
+                            ),
+                            SizedBox(height: 10),
+
+                            TextFormField(
+                              onChanged: (String value) {
+                                setState(() {
+                                  passwd = value;
+                                });
+                              },
+                              // keyboardType: ,
                               controller: passWordController,
                               obscureText: true,
-                              icon: Icon(Icons.lock)),
-                          SizedBox(height: 10),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                                title: 'Forgot Password?',
-                                weight: FontWeight.normal),
-                          ),
-                        ]),
+                              validator: (value) => value.length < 6
+                                  ? 'PassWord length is Short'
+                                  : null,
+                              // onChanged: (value) => email = value.trim(),
+                              decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                prefixIcon: Icon(Icons.lock),
+                                filled: true,
+                                fillColor: Colors.white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12.0)),
+                                  borderSide: BorderSide(
+                                      color: Colors.brown[100], width: 2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide:
+                                      BorderSide(color: Colors.brown[100]),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                  title: 'Forgot Password?',
+                                  weight: FontWeight.normal),
+                            ),
+                          ]),
+                    ),
                   ),
                 ),
                 Container(
                   width: 800,
                   height: 40,
                   child: GestureDetector(
-                    onTap: () {
-                      print('tapped');
+                    onTap: () async {
+                      print('LOGIN tapped');
+                      print(email);
+                      print(passwd);
+                      if (_formKey.currentState.validate()) {
+                        dynamic result = await _auth.signInWithEmailandPass(
+                            email: email, password: passwd);
+                        print(result);
+                        if (result == null) {
+                          print('Signed in'); //should give an error!!!!
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => MyHomePage()));
+                        } else {
+                          setState(() {
+                            error = 'Please Supply a Valid Email or PassWord!';
+                          });
+                        }
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +198,8 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: textColor),
                   ),
                   TextButton(title: 'Sign Up', weight: FontWeight.bold),
-                ])
+                ]),
+                Text(error),
               ],
             ),
           ),

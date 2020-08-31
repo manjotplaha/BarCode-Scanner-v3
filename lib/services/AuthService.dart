@@ -11,6 +11,7 @@ class AuthService {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
+        return user;
       }
     });
   }
@@ -34,6 +35,8 @@ class AuthService {
       // ignore: unused_local_variable
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+      print('this is usercredentials: $userCredential'); //not working!!!
+      print('User Signed in with Email and Pwd');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
