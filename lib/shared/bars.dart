@@ -1,3 +1,4 @@
+import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -38,20 +39,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
 }
 
 AppBar buildAppBar(BuildContext context, String pageTitle) {
+  AuthService _auth = new AuthService();
   return AppBar(
     title: Text(
       '$pageTitle',
       style: Theme.of(context).textTheme.headline6,
     ),
     actions: <Widget>[
-      PopupMenuButton(
-          itemBuilder: (_) => [
-                PopupMenuItem(
-                  child: Text('Settings'),
-                  value: 0,
-                )
-              ],
-          icon: Icon(Icons.more_vert))
+      MaterialButton(
+        onPressed: () async {
+          dynamic result = await _auth.signOut();
+          print(result);
+          Navigator.pushNamed(context, '/firstPage');
+        },
+        child: Row(children: [Icon(Icons.exit_to_app), Text('Sign Out')]),
+      )
     ],
   );
 }

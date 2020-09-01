@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextButton extends StatelessWidget {
@@ -112,5 +113,19 @@ class CustomButton extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class GoogleSignInButton extends StatelessWidget {
+  const GoogleSignInButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SignInButton(
+      Buttons.Google,
+      onPressed: () {},
+    );
   }
 }

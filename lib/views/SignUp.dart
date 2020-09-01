@@ -1,8 +1,9 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
-import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
+import 'package:barcode_scanner_v3/shared/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:barcode_scanner_v3/shared/constants.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -10,13 +11,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final _formKey = GlobalKey<FormState>();
+  AuthService _auth = new AuthService();
+
   final emailController = TextEditingController();
   final passWordController = TextEditingController();
-  final Color primaryColor = Colors.cyan[800];
 
-  final Color secondaryColor = Color(0xff232c51);
-
-  final Color textColor = Colors.brown[50];
+  String email = '';
+  String passwd = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,43 +40,88 @@ class _SignUpState extends State<SignUp> {
                   margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Email',
-                            style: TextStyle(color: textColor),
-                          ),
-                          SizedBox(height: 5),
-                          CustomTextField(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Email',
+                              style: TextStyle(color: textColor),
+                            ),
+                            SizedBox(height: 5),
+                            TextFormField(
+                              onChanged: (String value) {
+                                setState(() {
+                                  email = value;
+                                });
+                              },
                               controller: emailController,
                               obscureText: false,
-                              icon: Icon(Icons.email)),
-                          SizedBox(height: 5),
-                          Text(
-                            'Password',
-                            style: TextStyle(color: textColor),
-                          ),
-                          SizedBox(height: 5),
-                          CustomTextField(
-                            controller: passWordController,
-                            obscureText: true,
-                            icon: Icon(Icons.lock),
-                          ),
-                        ]),
+                              validator: (value) {
+                                value.trim();
+                                if (value.isEmpty) {
+                                  return 'Email cannot be empty';
+                                } else if (!EmailValidator.validate(value)) {
+                                  return 'Not valid format';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              decoration:
+                                  buildInputDecoration(Icon(Icons.email)),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              'Password',
+                              style: TextStyle(color: textColor),
+                            ),
+                            SizedBox(height: 5),
+                            TextFormField(
+                                onChanged: (String value) {
+                                  setState(() {
+                                    passwd = value;
+                                  });
+                                },
+                                // keyboardType: ,
+                                controller: passWordController,
+                                obscureText: true,
+                                validator: (value) {
+                                  value.trim();
+                                  if (value.length < 6) {
+                                    return 'PassWord length is Short';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration:
+                                    buildInputDecoration(Icon(Icons.lock))),
+                          ]),
+                    ),
                   ),
                 ),
                 Container(
                   width: 800,
                   height: 40,
                   child: GestureDetector(
-                    onTap: () {
-                      print('tapped');
+                    onTap: () async {
+                      print('REGISTER tapped');
+                      if (_formKey.currentState.validate()) {
+                        dynamic result = await _auth.registerWithEmailandPass(
+                            email: email, password: passwd);
+                        print(result);
+                        if (result == null) {
+                          print('Error Occured');
+                        } else {
+                          print('Signed in');
+                          Navigator.pushNamed(context, '/home');
+                        }
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('LOGIN',
+                        Text('REGISTER',
                             style: GoogleFonts.varelaRound(
                               color: Colors.yellow[200],
                               fontSize: 30,
@@ -87,12 +134,7 @@ class _SignUpState extends State<SignUp> {
                   '-OR-',
                   style: TextStyle(color: textColor),
                 ),
-                SignInButton(
-                  Buttons.Google,
-                  onPressed: () {
-                    AuthService().signInWithGoogle();
-                  },
-                ),
+                GoogleSignInButton(),
                 SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
@@ -105,6 +147,23 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  InputDecoration buildInputDecoration(Icon icon) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+      prefixIcon: icon,
+      filled: true,
+      fillColor: Colors.white,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        borderSide: BorderSide(color: Colors.brown[100], width: 2),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        borderSide: BorderSide(color: Colors.brown[100]),
       ),
     );
   }

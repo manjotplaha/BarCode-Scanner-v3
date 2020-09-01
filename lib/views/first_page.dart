@@ -1,15 +1,15 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/views/SignIn.dart';
 import 'package:barcode_scanner_v3/views/SignUp.dart';
-import 'package:barcode_scanner_v3/views/home.dart';
+
 // import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:barcode_scanner_v3/shared/constants.dart';
 
 class FirstPage extends StatelessWidget {
   final AuthService _auth = AuthService();
-  final Color primaryColor = Colors.cyan[800];
-  final Color secondaryColor = Color(0xff232c51);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -149,8 +149,6 @@ class FirstPage extends StatelessWidget {
                             print('Error Signing in');
                           } else {
                             print('Signed in');
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => MyHomePage()));
                           }
                         },
                         child: Row(
