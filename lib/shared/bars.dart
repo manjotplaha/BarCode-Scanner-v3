@@ -1,4 +1,7 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/views/cart.dart';
+import 'package:barcode_scanner_v3/views/first_page.dart';
+import 'package:barcode_scanner_v3/views/home.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar(
+      cornerRadius: 20,
       height: 45,
       style: TabStyle.fixedCircle, backgroundColor: Colors.teal[900],
       items: [
@@ -22,15 +26,44 @@ class _BottomNavBarState extends State<BottomNavBar> {
         TabItem(icon: Icons.add, title: 'Add'),
         TabItem(icon: Icons.people, title: 'Profile'),
       ],
-      // initialActiveIndex: pageNumber, //optional, default as 0
+      initialActiveIndex: 1, //optional, default as 0
       onTap: (int i) {
         if (i == 0) {
           setState(() {
-            Navigator.pushNamed(context, '/cart');
+            // Navigator.pushNamed(context, '/cart');
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return CartView();
+              },
+              transitionDuration: Duration(milliseconds: 200),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                animation = CurvedAnimation(
+                    curve: Curves.easeInCubic, parent: animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ));
           });
         } else if (i == 1) {
           setState(() {
-            Navigator.pushNamed(context, '/home');
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return MyHomePage();
+              },
+              transitionDuration: Duration(milliseconds: 200),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                animation = CurvedAnimation(
+                    curve: Curves.easeInCubic, parent: animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ));
           });
         }
       },
@@ -50,7 +83,21 @@ AppBar buildAppBar(BuildContext context, String pageTitle) {
         onPressed: () async {
           dynamic result = await _auth.signOut();
           print(result);
-          Navigator.pushNamed(context, '/firstPage');
+          Navigator.of(context).push(PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return FirstPage();
+            },
+            transitionDuration: Duration(milliseconds: 200),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              animation =
+                  CurvedAnimation(curve: Curves.easeInCubic, parent: animation);
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ));
         },
         child: Row(children: [Icon(Icons.exit_to_app), Text('Sign Out')]),
       )

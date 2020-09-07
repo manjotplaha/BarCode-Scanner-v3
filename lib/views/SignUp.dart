@@ -1,5 +1,6 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/shared/login_widgets.dart';
+import 'package:barcode_scanner_v3/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:email_validator/email_validator.dart';
@@ -114,7 +115,22 @@ class _SignUpState extends State<SignUp> {
                           print('Error Occured');
                         } else {
                           print('Signed in');
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.of(context).push(PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return MyHomePage();
+                            },
+                            transitionDuration: Duration(milliseconds: 200),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              animation = CurvedAnimation(
+                                  curve: Curves.easeInCubic, parent: animation);
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ));
                         }
                       }
                     },

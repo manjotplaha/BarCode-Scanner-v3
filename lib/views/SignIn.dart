@@ -192,8 +192,21 @@ class LoginButton extends StatelessWidget {
             print(result);
             if (result == null) {
               print('Signed in'); //should give an error!!!!
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => MyHomePage()));
+              Navigator.of(context).push(PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return MyHomePage();
+                },
+                transitionDuration: Duration(milliseconds: 200),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(
+                      curve: Curves.easeInCubic, parent: animation);
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              ));
             } else {
               print('Error Occured');
             }

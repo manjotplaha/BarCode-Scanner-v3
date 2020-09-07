@@ -1,6 +1,7 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/views/SignIn.dart';
 import 'package:barcode_scanner_v3/views/SignUp.dart';
+import 'package:barcode_scanner_v3/views/home.dart';
 
 // import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
@@ -58,9 +59,24 @@ class FirstPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           print('SIGN IN tapped');
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => SignIn()));
-
+                          // Navigator.of(context).push(
+                          //     MaterialPageRoute(builder: (_) => SignIn()));
+                          Navigator.of(context).push(PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return SignIn();
+                            },
+                            transitionDuration: Duration(milliseconds: 200),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              animation = CurvedAnimation(
+                                  curve: Curves.easeInCubic, parent: animation);
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ));
                           // dynamic result = await methodName;
                           // if (result == null) {
                           //   print('Error Signing in');
@@ -100,9 +116,24 @@ class FirstPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           print('SIGN UP tapped');
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => SignUp()));
-
+                          // Navigator.of(context).push(
+                          //     MaterialPageRoute(builder: (_) => SignUp()));
+                          Navigator.of(context).push(PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return SignUp();
+                            },
+                            transitionDuration: Duration(milliseconds: 200),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              animation = CurvedAnimation(
+                                  curve: Curves.easeInCubic, parent: animation);
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ));
                           // dynamic result = await methodName;
                           // if (result == null) {
                           //   print('Error Signing in');
@@ -148,7 +179,23 @@ class FirstPage extends StatelessWidget {
                           if (result == null) {
                             print('Error Signing in');
                           } else {
-                            print('Signed in');
+                            Navigator.of(context).push(PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
+                                return MyHomePage();
+                              },
+                              transitionDuration: Duration(milliseconds: 500),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                animation = CurvedAnimation(
+                                    curve: Curves.easeInCubic,
+                                    parent: animation);
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                );
+                              },
+                            ));
                           }
                         },
                         child: Row(

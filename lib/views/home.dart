@@ -37,8 +37,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() async {
       scanBarcode = barcodeScanRes;
-
-      _modalBottomSheetInformation();
+      print('$scanBarcode');
+      if (scanBarcode != '-1') {
+        _modalBottomSheetInformation();
+      } else {
+        scanBarcode = 'Unable to Scan Barcode, Try Again!';
+      }
     });
   }
 
@@ -56,15 +60,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: buildAppBar(context, 'BarCode Scanner'),
-        body: Container(
+        body: AnimatedContainer(
           width: double.infinity,
+          duration: Duration(seconds: 2),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text('Here Goes the Scannner'),
                 RaisedButton(
-                    onPressed: () => scanBarcodeNormal(),
+                    onPressed: () {
+                      scanBarcodeNormal();
+                    },
                     child: Text("Start barcode scan")),
                 Text('Scan result : $scanBarcode\n',
                     style: TextStyle(fontSize: 20)),
