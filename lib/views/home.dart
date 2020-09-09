@@ -60,9 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: buildAppBar(context, 'BarCode Scanner'),
-        body: AnimatedContainer(
+        body: Container(
           width: double.infinity,
-          duration: Duration(seconds: 2),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

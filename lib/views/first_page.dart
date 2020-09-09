@@ -1,14 +1,14 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
 import 'package:barcode_scanner_v3/views/SignIn.dart';
 import 'package:barcode_scanner_v3/views/SignUp.dart';
 import 'package:barcode_scanner_v3/views/home.dart';
-
-// import 'package:barcode_scanner_v3/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:barcode_scanner_v3/shared/constants.dart';
 
 class FirstPage extends StatelessWidget {
+  final Methods methodName = Methods();
   final AuthService _auth = AuthService();
 
   @override
@@ -44,11 +44,6 @@ class FirstPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                  // CustomButton(
-                  //   title: 'SIGN IN',
-                  //   screen: SignIn(),
-                  //   methodName: null,
-                  // ),
                   Container(
                       width: 800,
                       height: 40,
@@ -59,32 +54,9 @@ class FirstPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           print('SIGN IN tapped');
-                          // Navigator.of(context).push(
-                          //     MaterialPageRoute(builder: (_) => SignIn()));
-                          Navigator.of(context).push(PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                              return SignIn();
-                            },
-                            transitionDuration: Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              animation = CurvedAnimation(
-                                  curve: Curves.easeInCubic, parent: animation);
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ));
-                          // dynamic result = await methodName;
-                          // if (result == null) {
-                          //   print('Error Signing in');
-                          // } else {
-                          //   print('Signed in');
-                          //   Navigator.of(context)
-                          //       .push(MaterialPageRoute(builder: (_) => screen));
-                          // }
+
+                          Navigator.of(context)
+                              .push(methodName.buildAnimatedRoute(SignIn()));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +77,6 @@ class FirstPage extends StatelessWidget {
                         ),
                       )),
                   SizedBox(height: 10),
-                  // CustomButton(title: 'SIGN UP', screen: SignUp()),
                   Container(
                       width: 800,
                       height: 40,
@@ -116,32 +87,9 @@ class FirstPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           print('SIGN UP tapped');
-                          // Navigator.of(context).push(
-                          //     MaterialPageRoute(builder: (_) => SignUp()));
-                          Navigator.of(context).push(PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                              return SignUp();
-                            },
-                            transitionDuration: Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              animation = CurvedAnimation(
-                                  curve: Curves.easeInCubic, parent: animation);
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ));
-                          // dynamic result = await methodName;
-                          // if (result == null) {
-                          //   print('Error Signing in');
-                          // } else {
-                          //   print('Signed in');
-                          //   Navigator.of(context)
-                          //       .push(MaterialPageRoute(builder: (_) => SignUp()));
-                          // }
+
+                          Navigator.of(context)
+                              .push(methodName.buildAnimatedRoute(SignUp()));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +110,6 @@ class FirstPage extends StatelessWidget {
                         ),
                       )),
                   SizedBox(height: 10),
-
                   Container(
                       width: 800,
                       height: 40,
@@ -179,23 +126,8 @@ class FirstPage extends StatelessWidget {
                           if (result == null) {
                             print('Error Signing in');
                           } else {
-                            Navigator.of(context).push(PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) {
-                                return MyHomePage();
-                              },
-                              transitionDuration: Duration(milliseconds: 500),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                animation = CurvedAnimation(
-                                    curve: Curves.easeInCubic,
-                                    parent: animation);
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ));
+                            Navigator.of(context).push(
+                                methodName.buildAnimatedRoute(MyHomePage()));
                           }
                         },
                         child: Row(

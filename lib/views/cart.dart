@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var cartItem = Provider.of<CartProvider>(context).cartItems;
+    var cartItem = Provider.of<CartProvider>(context, listen: false).cartItems;
     return Scaffold(
       appBar: buildAppBar(context, 'CartView'),
       body: cartItem.isEmpty
@@ -18,8 +18,7 @@ class CartView extends StatelessWidget {
           : ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: ListView.builder(
-                  itemCount:
-                      Provider.of<CartProvider>(context).cartItems.length,
+                  itemCount: cartItem.length,
                   itemBuilder: (context, i) {
                     return Card(
                       child: ListTile(

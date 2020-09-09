@@ -1,4 +1,5 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
 import 'package:barcode_scanner_v3/shared/login_widgets.dart';
 import 'package:barcode_scanner_v3/views/home.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  Methods methodName = Methods();
   final _formKey = GlobalKey<FormState>();
   AuthService _auth = new AuthService();
 
@@ -69,8 +71,8 @@ class _SignUpState extends State<SignUp> {
                                   return null;
                                 }
                               },
-                              decoration:
-                                  buildInputDecoration(Icon(Icons.email)),
+                              decoration: methodName
+                                  .buildInputDecoration(Icon(Icons.email)),
                             ),
                             SizedBox(height: 5),
                             Text(
@@ -95,8 +97,8 @@ class _SignUpState extends State<SignUp> {
                                     return null;
                                   }
                                 },
-                                decoration:
-                                    buildInputDecoration(Icon(Icons.lock))),
+                                decoration: methodName
+                                    .buildInputDecoration(Icon(Icons.lock))),
                           ]),
                     ),
                   ),
@@ -115,22 +117,8 @@ class _SignUpState extends State<SignUp> {
                           print('Error Occured');
                         } else {
                           print('Signed in');
-                          Navigator.of(context).push(PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                              return MyHomePage();
-                            },
-                            transitionDuration: Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              animation = CurvedAnimation(
-                                  curve: Curves.easeInCubic, parent: animation);
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ));
+                          Navigator.of(context).push(
+                              methodName.buildAnimatedRoute(MyHomePage()));
                         }
                       }
                     },
@@ -163,23 +151,6 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  InputDecoration buildInputDecoration(Icon icon) {
-    return InputDecoration(
-      contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-      prefixIcon: icon,
-      filled: true,
-      fillColor: Colors.white,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        borderSide: BorderSide(color: Colors.brown[100], width: 2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.brown[100]),
       ),
     );
   }

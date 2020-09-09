@@ -1,4 +1,5 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
 import 'package:barcode_scanner_v3/views/home.dart';
 import 'package:barcode_scanner_v3/shared/login_widgets.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  Methods methodName = Methods();
   AuthService _auth = new AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -73,8 +75,8 @@ class _SignInState extends State<SignIn> {
                                   return null;
                                 }
                               },
-                              decoration:
-                                  buildInputDecoration(Icon(Icons.email)),
+                              decoration: methodName
+                                  .buildInputDecoration(Icon(Icons.email)),
                             ),
                             SizedBox(height: 10),
 
@@ -103,9 +105,8 @@ class _SignInState extends State<SignIn> {
                                     return null;
                                   }
                                 },
-                                // onChanged: (value) => email = value.trim(),
-                                decoration:
-                                    buildInputDecoration(Icon(Icons.lock))),
+                                decoration: methodName
+                                    .buildInputDecoration(Icon(Icons.lock))),
                             SizedBox(height: 10),
                             Container(
                               alignment: Alignment.centerRight,
@@ -143,27 +144,10 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
-
-  InputDecoration buildInputDecoration(Icon icon) {
-    return InputDecoration(
-      contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-      prefixIcon: icon,
-      filled: true,
-      fillColor: Colors.white,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        borderSide: BorderSide(color: Colors.brown[100], width: 2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.brown[100]),
-      ),
-    );
-  }
 }
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({
+  LoginButton({
     Key key,
     @required GlobalKey<FormState> formKey,
     @required AuthService auth,
@@ -177,6 +161,7 @@ class LoginButton extends StatelessWidget {
   final AuthService _auth;
   final String email;
   final String passwd;
+  final Methods methodName = Methods();
 
   @override
   Widget build(BuildContext context) {
@@ -192,21 +177,8 @@ class LoginButton extends StatelessWidget {
             print(result);
             if (result == null) {
               print('Signed in'); //should give an error!!!!
-              Navigator.of(context).push(PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return MyHomePage();
-                },
-                transitionDuration: Duration(milliseconds: 200),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(
-                      curve: Curves.easeInCubic, parent: animation);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-              ));
+              Navigator.of(context)
+                  .push(methodName.buildAnimatedRoute(MyHomePage()));
             } else {
               print('Error Occured');
             }
