@@ -29,7 +29,7 @@ class Information extends StatelessWidget {
               return Text('Error');
             }
             return Container(
-                padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                 width: double.infinity,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
