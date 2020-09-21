@@ -2,6 +2,7 @@ import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
 import 'package:barcode_scanner_v3/models/info_model.dart';
 import 'package:barcode_scanner_v3/services/article_service.dart';
 import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
+import 'package:barcode_scanner_v3/shared/widgets/ShimmerLoader.dart';
 import 'package:barcode_scanner_v3/views/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,81 +29,84 @@ class Information extends StatelessWidget {
             if (snapshot.hasError) {
               return Text('Error');
             }
-            return Container(
-                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                width: double.infinity,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '${snapshot.data.items[0].title}',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Quicksand'),
-                      ),
-                      SizedBox(height: 5.0),
-                      Text('Brand:  ${snapshot.data.items[0].brand}',
-                          style: contentsStyling()),
-                      Text('Color:  ${snapshot.data.items[0].color}',
-                          style: contentsStyling()),
-                      Text('UPC:  ${snapshot.data.items[0].upc}',
-                          style: contentsStyling()),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      // Text(
-                      //     'Description:  ${snapshot.data.items[0].description}',
-                      //     style: contentsStyling()),
-                      // SizedBox(height: 15.0),
-                      Text(
-                        'Category:  ${snapshot.data.items[0].category}',
-                        textAlign: TextAlign.end,
-                        style: contentsStyling(),
-                      ),
-
-                      ButtonBar(children: [
-                        ChangeNotifierProvider(
-                          create: (BuildContext context) {
-                            CartProvider();
-                          },
-                          child: RaisedButton(
-                            onPressed: () {
-                              // Navigator.pushNamed(context, '/cart');
-                              Navigator.of(context).push(
-                                  methodName.buildAnimatedRoute(CartView()));
-                              Provider.of<CartProvider>(context, listen: false)
-                                  .add(snapshot.data);
-                            },
-                            color: Colors.red,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0)),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(Icons.shopping_cart),
-                                Text(
-                                  'Add To Cart',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ])
-                    ]));
-          } else {
-            CircularProgressIndicator();
-          }
-          return Center(child: CircularProgressIndicator());
+            return buildInfoView(snapshot, context);
+          } else {}
+          return ShimmerLoader();
         },
       ),
     );
+  }
+
+  Container buildInfoView(
+      AsyncSnapshot<Article> snapshot, BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+        width: double.infinity,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${snapshot.data.items[0].title}',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Quicksand'),
+              ),
+              SizedBox(height: 5.0),
+              Text('Brand:  ${snapshot.data.items[0].brand}',
+                  style: contentsStyling()),
+              Text('Color:  ${snapshot.data.items[0].color}',
+                  style: contentsStyling()),
+              Text('UPC:  ${snapshot.data.items[0].upc}',
+                  style: contentsStyling()),
+              SizedBox(
+                height: 15.0,
+              ),
+              // Text(
+              //     'Description:  ${snapshot.data.items[0].description}',
+              //     style: contentsStyling()),
+              // SizedBox(height: 15.0),
+              Text(
+                'Category:  ${snapshot.data.items[0].category}',
+                textAlign: TextAlign.end,
+                style: contentsStyling(),
+              ),
+
+              ButtonBar(children: [
+                ChangeNotifierProvider(
+                  create: (BuildContext context) {
+                    CartProvider();
+                  },
+                  child: RaisedButton(
+                    onPressed: () {
+                      // Navigator.pushNamed(context, '/cart');
+                      Navigator.of(context)
+                          .push(methodName.buildAnimatedRoute(CartView()));
+                      Provider.of<CartProvider>(context, listen: false)
+                          .add(snapshot.data);
+                    },
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.shopping_cart),
+                        Text(
+                          'Add To Cart',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ])
+            ]));
   }
 
   TextStyle contentsStyling() {
