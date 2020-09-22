@@ -79,12 +79,26 @@ class Information extends StatelessWidget {
                     CartProvider();
                   },
                   child: RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // Navigator.pushNamed(context, '/cart');
-                      Navigator.of(context)
-                          .push(methodName.buildAnimatedRoute(CartView()));
-                      Provider.of<CartProvider>(context, listen: false)
-                          .add(snapshot.data);
+                      try {
+                        Navigator.of(context)
+                            .push(methodName.buildAnimatedRoute(CartView()));
+                        Provider.of<CartProvider>(context, listen: false)
+                            .add(snapshot.data);
+                      } catch (error) {
+                        await showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text('An Error Occured'),
+                            content: Text('Somethhing Went Wrong !'),
+                            actions: [
+                              FlatButton(
+                                  onPressed: Navigator.of(ctx).pop, child: null)
+                            ],
+                          ),
+                        );
+                      }
                     },
                     color: Colors.red,
                     shape: RoundedRectangleBorder(

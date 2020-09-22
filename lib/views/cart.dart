@@ -3,7 +3,31 @@ import 'package:barcode_scanner_v3/shared/bars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CartView extends StatelessWidget {
+class CartView extends StatefulWidget {
+  @override
+  _CartViewState createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
+  var _isInit = true;
+  @override
+  void initState() {
+    // Provider.of<CartProvider>(context).fetchAndSetProducts();
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<CartProvider>(context).fetchAndSetProducts();
+    // });
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<CartProvider>(context).fetchAndSetProducts();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cartItem = Provider.of<CartProvider>(context, listen: false).cartItems;
@@ -22,8 +46,8 @@ class CartView extends StatelessWidget {
                   itemBuilder: (context, i) {
                     return Card(
                       child: ListTile(
-                        title: Text('${cartItem[i].items[0].title}'),
-                        subtitle: Text('${cartItem[i].items[0].upc}'),
+                        title: Text('${cartItem[i].title}'),
+                        subtitle: Text('${cartItem[i].upc}'),
                         trailing: FittedBox(
                           child: ButtonBar(children: [
                             IconButton(
