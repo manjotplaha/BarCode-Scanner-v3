@@ -28,41 +28,49 @@ class _CartViewState extends State<CartView> {
     super.didChangeDependencies();
   }
 
+  Future<void> _refreshCart(BuildContext context) async {
+    await Provider.of<CartProvider>(context, listen: false)
+        .fetchAndSetProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cartItem = Provider.of<CartProvider>(context, listen: false).cartItems;
     return Scaffold(
       appBar: buildAppBar(context, 'CartView'),
-      body: cartItem.isEmpty
-          ? Center(
-              child: Text(
-              'Add Something to your Cart !',
-              style: Theme.of(context).textTheme.headline6,
-            ))
-          : ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: ListView.builder(
-                  itemCount: cartItem.length,
-                  itemBuilder: (context, i) {
-                    return Card(
-                      child: ListTile(
-                        title: Text('${cartItem[i].title}'),
-                        subtitle: Text('${cartItem[i].upc}'),
-                        trailing: FittedBox(
-                          child: ButtonBar(children: [
-                            IconButton(
-                                icon: Icon(Icons.remove_circle_outline),
-                                onPressed: null),
-                            Text(('1')),
-                            IconButton(
-                                icon: Icon(Icons.add_circle_outline),
-                                onPressed: null)
-                          ]),
+      body: RefreshIndicator(
+        onRefresh: () => _refreshCart(context),
+        child: cartItem.isEmpty
+            ? Center(
+                child: Text(
+                'Add Something to your Cart !',
+                style: Theme.of(context).textTheme.headline6,
+              ))
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: ListView.builder(
+                    itemCount: cartItem.length,
+                    itemBuilder: (context, i) {
+                      return Card(
+                        child: ListTile(
+                          title: Text('${cartItem[i].title}'),
+                          subtitle: Text('${cartItem[i].upc}'),
+                          trailing: FittedBox(
+                            child: ButtonBar(children: [
+                              IconButton(
+                                  icon: Icon(Icons.remove_circle_outline),
+                                  onPressed: null),
+                              Text(('1')),
+                              IconButton(
+                                  icon: Icon(Icons.add_circle_outline),
+                                  onPressed: null)
+                            ]),
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-            ),
+                      );
+                    }),
+              ),
+      ),
       bottomNavigationBar: BottomNavBar(),
     );
   }
