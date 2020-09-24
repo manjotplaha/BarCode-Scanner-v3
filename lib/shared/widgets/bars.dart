@@ -1,7 +1,7 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
-import 'package:barcode_scanner_v3/views/cart.dart';
-import 'package:barcode_scanner_v3/views/first_page.dart';
-import 'package:barcode_scanner_v3/views/home.dart';
+import 'package:barcode_scanner_v3/views/cart_view.dart';
+import 'package:barcode_scanner_v3/views/first_view.dart';
+import 'package:barcode_scanner_v3/views/home_view.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 

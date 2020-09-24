@@ -1,5 +1,5 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
-import 'package:barcode_scanner_v3/shared/bars.dart';
+import 'package:barcode_scanner_v3/shared/widgets/bars.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

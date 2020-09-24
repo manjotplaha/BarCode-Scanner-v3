@@ -1,8 +1,8 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
-import 'package:barcode_scanner_v3/views/SignIn.dart';
-import 'package:barcode_scanner_v3/views/SignUp.dart';
-import 'package:barcode_scanner_v3/views/home.dart';
+import 'package:barcode_scanner_v3/views/signIn_view.dart';
+import 'package:barcode_scanner_v3/views/signUp_view.dart';
+import 'package:barcode_scanner_v3/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:barcode_scanner_v3/shared/constants.dart';

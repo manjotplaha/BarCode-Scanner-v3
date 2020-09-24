@@ -1,5 +1,5 @@
-import 'package:barcode_scanner_v3/views/first_page.dart';
-import 'package:barcode_scanner_v3/views/home.dart';
+import 'package:barcode_scanner_v3/views/first_view.dart';
+import 'package:barcode_scanner_v3/views/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

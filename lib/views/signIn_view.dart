@@ -1,27 +1,28 @@
 import 'package:barcode_scanner_v3/services/AuthService.dart';
 import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
-import 'package:barcode_scanner_v3/shared/login_widgets.dart';
-import 'package:barcode_scanner_v3/views/home.dart';
+import 'package:barcode_scanner_v3/views/home_view.dart';
+import 'package:barcode_scanner_v3/shared/widgets/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:barcode_scanner_v3/shared/constants.dart';
 
-class SignUp extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  _SignUpState createState() => _SignUpState();
+  _SignInState createState() => _SignInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignInState extends State<SignIn> {
   Methods methodName = Methods();
-  final _formKey = GlobalKey<FormState>();
   AuthService _auth = new AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
   final passWordController = TextEditingController();
 
   String email = '';
   String passwd = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +49,20 @@ class _SignUpState extends State<SignUp> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            //email text field
                             Text(
                               'Email',
                               style: TextStyle(color: textColor),
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 10),
+
                             TextFormField(
                               onChanged: (String value) {
                                 setState(() {
                                   email = value;
                                 });
                               },
+                              // keyboardType: ,
                               controller: emailController,
                               obscureText: false,
                               validator: (value) {
@@ -74,12 +78,16 @@ class _SignUpState extends State<SignUp> {
                               decoration: methodName
                                   .buildInputDecoration(Icon(Icons.email)),
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 10),
+
+                            //password text field
+
                             Text(
                               'Password',
                               style: TextStyle(color: textColor),
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 10),
+
                             TextFormField(
                                 onChanged: (String value) {
                                   setState(() {
@@ -99,41 +107,22 @@ class _SignUpState extends State<SignUp> {
                                 },
                                 decoration: methodName
                                     .buildInputDecoration(Icon(Icons.lock))),
+                            SizedBox(height: 10),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                  title: 'Forgot Password?',
+                                  weight: FontWeight.normal),
+                            ),
                           ]),
                     ),
                   ),
                 ),
-                Container(
-                  width: 800,
-                  height: 40,
-                  child: GestureDetector(
-                    onTap: () async {
-                      print('REGISTER tapped');
-                      if (_formKey.currentState.validate()) {
-                        dynamic result = await _auth.registerWithEmailandPass(
-                            email: email, password: passwd);
-                        print(result);
-                        if (result == null) {
-                          print('Error Occured');
-                        } else {
-                          print('Signed in');
-                          Navigator.of(context).push(
-                              methodName.buildAnimatedRoute(MyHomePage()));
-                        }
-                      }
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('REGISTER',
-                            style: GoogleFonts.varelaRound(
-                              color: Colors.yellow[200],
-                              fontSize: 30,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
+                LoginButton(
+                    formKey: _formKey,
+                    auth: _auth,
+                    email: email,
+                    passwd: passwd),
                 Text(
                   '-OR-',
                   style: TextStyle(color: textColor),
@@ -142,14 +131,68 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
-                    'Already have an Account ? ',
+                    'Don\'t have an Account ? ',
                     style: TextStyle(color: textColor),
                   ),
-                  TextButton(title: 'Sign In', weight: FontWeight.bold),
-                ])
+                  TextButton(title: 'Sign Up', weight: FontWeight.bold),
+                ]),
+                Text(error),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  LoginButton({
+    Key key,
+    @required GlobalKey<FormState> formKey,
+    @required AuthService auth,
+    @required this.email,
+    @required this.passwd,
+  })  : _formKey = formKey,
+        _auth = auth,
+        super(key: key);
+
+  final GlobalKey<FormState> _formKey;
+  final AuthService _auth;
+  final String email;
+  final String passwd;
+  final Methods methodName = Methods();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 40,
+      child: GestureDetector(
+        onTap: () async {
+          print('LOGIN tapped');
+          if (_formKey.currentState.validate()) {
+            dynamic result = await _auth.signInWithEmailandPass(
+                email: email, password: passwd);
+            print(result);
+            if (result == null) {
+              print('Signed in'); //should give an error!!!!
+              Navigator.of(context)
+                  .push(methodName.buildAnimatedRoute(MyHomePage()));
+            } else {
+              print('Error Occured');
+            }
+          }
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('LOGIN',
+                style: GoogleFonts.varelaRound(
+                  color: Colors.yellow[200],
+                  fontSize: 30,
+                )),
+          ],
         ),
       ),
     );
