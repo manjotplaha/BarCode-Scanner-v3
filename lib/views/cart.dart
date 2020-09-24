@@ -60,7 +60,7 @@ class _CartViewState extends State<CartView> {
                               IconButton(
                                   icon: Icon(Icons.remove_circle_outline),
                                   onPressed: null),
-                              Text(('1')),
+                              Text('${cartItem[i].quantity}'),
                               IconButton(
                                   icon: Icon(Icons.add_circle_outline),
                                   onPressed: null)

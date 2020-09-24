@@ -20,6 +20,7 @@ class CartProvider extends ChangeNotifier {
           'title': item.items[0].title,
           'upc': item.items[0].upc,
           'brand': item.items[0].brand,
+          'quantity': item.items[0].quantity,
         }),
       );
       // _cartArticles.add(item);
@@ -50,6 +51,7 @@ class CartProvider extends ChangeNotifier {
               title: prodData['title'],
               upc: prodData['upc'],
               brand: prodData['brand'],
+              quantity: prodData['quantity'],
             ),
           );
         },

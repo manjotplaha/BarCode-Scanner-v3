@@ -14,6 +14,7 @@ Future<Article> lookUp(_scanBarcode) async {
     final parsedJson = json.decode(response.body);
     article = Article.fromJson(parsedJson) ?? 'null output';
     print('Article is: ' + article.items[0].title);
+    print('Article quantity is ${article.items[0].quantity}');
   } catch (e) {
     print('error occured in article_service.dart');
     print(e.toString());

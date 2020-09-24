@@ -9,13 +9,14 @@ class CartItem {
   // String color;
   // String size;
   // double price;
-  // int quantity;
+  int quantity;
 
   CartItem(
       {@required this.title,
       @required this.id,
       @required this.brand,
-      @required this.upc});
+      @required this.upc,
+      @required this.quantity});
   // this.model,
   // @required this.color,
   // this.size,
