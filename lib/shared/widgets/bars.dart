@@ -1,7 +1,8 @@
-import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/Provider/AuthService.dart';
 import 'package:barcode_scanner_v3/views/cart_view.dart';
 import 'package:barcode_scanner_v3/views/first_view.dart';
 import 'package:barcode_scanner_v3/views/home_view.dart';
+import 'package:barcode_scanner_v3/views/profile_view.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +53,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Navigator.of(context).push(PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
                 return MyHomePage();
+              },
+              transitionDuration: Duration(milliseconds: 200),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                animation = CurvedAnimation(
+                    curve: Curves.easeInCubic, parent: animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ));
+          });
+        } else if (i == 2) {
+          setState(() {
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return ProfileView();
               },
               transitionDuration: Duration(milliseconds: 200),
               transitionsBuilder:

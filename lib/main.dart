@@ -1,5 +1,6 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
 import 'package:barcode_scanner_v3/Wrapper.dart';
+import 'package:barcode_scanner_v3/Provider/AuthService.dart';
 import 'package:barcode_scanner_v3/views/cart_view.dart';
 import 'package:barcode_scanner_v3/views/first_view.dart';
 import 'package:barcode_scanner_v3/views/home_view.dart';
@@ -16,8 +17,16 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CartProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CartProvider>(
+          create: (context) => CartProvider(),
+        ),
+        ChangeNotifierProvider<AuthService>(
+          create: (context) => AuthService(),
+        ),
+      ],
+      // create: (context) => CartProvider(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

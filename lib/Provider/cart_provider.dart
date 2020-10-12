@@ -14,7 +14,7 @@ class CartProvider extends ChangeNotifier {
   void add(Article item) async {
     final url = 'https://inventra-e8f8b.firebaseio.com/item.json';
     try {
-      final response = await http.post(
+      await http.post(
         url,
         body: json.encode({
           'title': item.items[0].title,

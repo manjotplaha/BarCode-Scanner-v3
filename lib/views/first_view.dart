@@ -1,4 +1,4 @@
-import 'package:barcode_scanner_v3/services/AuthService.dart';
+import 'package:barcode_scanner_v3/Provider/AuthService.dart';
 import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
 import 'package:barcode_scanner_v3/views/signIn_view.dart';
 import 'package:barcode_scanner_v3/views/signUp_view.dart';

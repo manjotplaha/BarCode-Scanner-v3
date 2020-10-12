@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthService {
+class AuthService with ChangeNotifier {
   //constructor to check if the user is already logged in or not,
 
   AuthService() {
@@ -17,6 +17,29 @@ class AuthService {
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future getCurrentUID() async {
+    try {
+      var currentUid = (_auth.currentUser).uid;
+      return currentUid;
+    } catch (e) {
+      print('Error getting UID');
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future getCurrentUser() async {
+    try {
+      // print(_auth.currentUser);
+      var currentUser = _auth.currentUser;
+      return currentUser;
+    } catch (e) {
+      print('Error getting CurrentUser');
+      // print(e.toString());
+      return null;
+    }
+  }
 
   Future signInAnon() async {
     try {
