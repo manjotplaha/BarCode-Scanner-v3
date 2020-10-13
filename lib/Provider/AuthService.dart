@@ -31,7 +31,7 @@ class AuthService with ChangeNotifier {
 
   Future getCurrentUser() async {
     try {
-      // print(_auth.currentUser);
+      print(_auth.currentUser);
       var currentUser = _auth.currentUser;
       return currentUser;
     } catch (e) {
@@ -102,6 +102,8 @@ class AuthService with ChangeNotifier {
     );
 
     // Once signed in, return the UserCredential
+    // print(
+    // "Sign in result ${FirebaseAuth.instance.signInWithCredential(credential)}");
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 

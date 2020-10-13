@@ -37,7 +37,8 @@ class UserProfileInfo extends StatelessWidget {
       children: <Widget>[
         Center(
           child: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/anonymous-user.png'),
+            // backgroundImage: NetworkImage("${snapshot.data.photoUrl}"),
+            backgroundImage: buildProfileImage(snapshot, context),
             radius: 40.0,
           ),
         ),
@@ -104,5 +105,13 @@ class UserProfileInfo extends StatelessWidget {
         )
       ],
     );
+  }
+
+  dynamic buildProfileImage(AsyncSnapshot snapshot, BuildContext context) {
+    if (snapshot.data.isAnonymous == true) {
+      return AssetImage('assets/images/anonymous-user.png');
+    } else if (snapshot.data.isAnonymous == false) {
+      return NetworkImage(snapshot.data.photoURL);
+    }
   }
 }

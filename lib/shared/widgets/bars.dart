@@ -15,10 +15,14 @@ class BottomNavBar extends StatefulWidget {
   _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _BottomNavBarState extends State<BottomNavBar>
+    with TickerProviderStateMixin {
+  // int activeIndex;
+  TabController _tabController;
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar(
+      controller: TabController(length: 3, vsync: this),
       cornerRadius: 20,
       height: 45,
       style: TabStyle.fixedCircle, backgroundColor: Colors.teal[900],

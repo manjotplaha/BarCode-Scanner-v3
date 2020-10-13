@@ -1,6 +1,10 @@
+import 'package:barcode_scanner_v3/Provider/AuthService.dart';
+import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
+import 'package:barcode_scanner_v3/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TextButton extends StatelessWidget {
   const TextButton({
@@ -117,15 +121,30 @@ class CustomButton extends StatelessWidget {
 }
 
 class GoogleSignInButton extends StatelessWidget {
-  const GoogleSignInButton({
+  GoogleSignInButton({
     Key key,
   }) : super(key: key);
+  final Methods methodName = Methods();
 
   @override
   Widget build(BuildContext context) {
     return SignInButton(
       Buttons.Google,
-      onPressed: () {},
+      onPressed: () async {
+        print('Google Sign in Tapped');
+
+        dynamic result = await Provider.of<AuthService>(context, listen: false)
+            .signInWithGoogle();
+        if (result == null) {
+          print('Error Signing in');
+        } else {
+          print(result);
+          print('Google Sign in Successful');
+          await Navigator.pushNamed(context, '/home');
+          Navigator.of(context)
+              .push(methodName.buildAnimatedRoute(MyHomePage()));
+        }
+      },
     );
   }
 }
