@@ -51,20 +51,34 @@ class _CartViewState extends State<CartView> {
                 child: ListView.builder(
                     itemCount: cartItem.length,
                     itemBuilder: (context, i) {
-                      return Card(
-                        child: ListTile(
-                          title: Text('${cartItem[i].title}'),
-                          subtitle: Text('${cartItem[i].upc}'),
-                          trailing: FittedBox(
-                            child: ButtonBar(children: [
-                              IconButton(
-                                  icon: Icon(Icons.remove_circle_outline),
-                                  onPressed: null),
-                              Text('${cartItem[i].quantity}'),
-                              IconButton(
-                                  icon: Icon(Icons.add_circle_outline),
-                                  onPressed: null)
-                            ]),
+                      return Dismissible(
+                        key: Key(cartItem[i].id),
+                        background: Container(color: Colors.red),
+                        onDismissed: (direction) {
+                          try {
+                            setState(() {
+                              cartItem.removeAt(i);
+                              print(cartItem[i].id);
+                            });
+                          } catch (e) {
+                            print('Error deleting Item');
+                          }
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text('${cartItem[i].title}'),
+                            subtitle: Text('${cartItem[i].upc}'),
+                            trailing: FittedBox(
+                              child: ButtonBar(children: [
+                                IconButton(
+                                    icon: Icon(Icons.remove_circle_outline),
+                                    onPressed: null),
+                                Text('${cartItem[i].quantity}'),
+                                IconButton(
+                                    icon: Icon(Icons.add_circle_outline),
+                                    onPressed: null)
+                              ]),
+                            ),
                           ),
                         ),
                       );
