@@ -39,6 +39,7 @@ dependencies:
   firebase_auth:
   google_sign_in: "^4.5.1"
   email_validator: '^1.0.0'
+  flutter_slidable: ^0.5.7
   shimmer: ^1.1.1
 
   # firebase_analytics:
