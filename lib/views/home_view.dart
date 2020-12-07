@@ -1,8 +1,11 @@
+import 'package:barcode_scanner_v3/Provider/product_provider.dart';
+import 'package:barcode_scanner_v3/views/products_view.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_scanner_v3/views/info_view.dart';
 import 'package:barcode_scanner_v3/shared/widgets/bars.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -59,23 +62,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(context, 'BarCode Scanner'),
-        body: Container(
-          width: double.infinity,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('Here Goes the Scannner'),
-                RaisedButton(
-                    onPressed: () {
-                      scanBarcodeNormal();
-                    },
-                    child: Text("Start barcode scan")),
-                Text('Scan result : $scanBarcode\n',
-                    style: TextStyle(fontSize: 20)),
-              ]),
-        ),
-        bottomNavigationBar: BottomNavBar());
+      appBar: buildAppBar(context, 'BarCode Scanner'),
+      body: Container(
+        width: double.infinity,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Here Goes the Scannner'),
+              RaisedButton(
+                  onPressed: () {
+                    scanBarcodeNormal();
+                  },
+                  child: Text("Start barcode scan")),
+              Text('Scan result : $scanBarcode\n',
+                  style: TextStyle(fontSize: 20)),
+            ]),
+      ),
+    );
   }
 }

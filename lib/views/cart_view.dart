@@ -50,72 +50,73 @@ class _CartViewState extends State<CartView> {
             : ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
                 child: ListView.builder(
-                    itemCount: cartItem.length,
-                    itemBuilder: (context, i) {
-                      return Slidable(
-                        key: Key(cartItem[i].id),
-                        // background: Container(color: Colors.red),
-                        // onDismissed: (direction) {
-                        //   try {
-                        //     setState(() {
-                        //       cartItem.removeAt(i);
-                        //       print(cartItem[i].id);
-                        //     });
-                        //   } catch (e) {
-                        //     print('Error deleting Item');
-                        //   }
-                        // },
-                        dismissal: SlidableDismissal(
-                          child: SlidableDrawerDismissal(),
-                          onDismissed: (actionType) {
-                            try {
-                              setState(() {
-                                cartItem.removeAt(i);
-                                print('${cartItem[i].id} Dismissed');
-                              });
-                            } catch (e) {
-                              print('Error Dismissing');
-                            }
-                          },
+                  itemCount: cartItem.length,
+                  itemBuilder: (context, i) {
+                    return Slidable(
+                      key: Key(cartItem[i].id),
+                      // background: Container(color: Colors.red),
+                      // onDismissed: (direction) {
+                      //   try {
+                      //     setState(() {
+                      //       cartItem.removeAt(i);
+                      //       print(cartItem[i].id);
+                      //     });
+                      //   } catch (e) {
+                      //     print('Error deleting Item');
+                      //   }
+                      // },
+                      dismissal: SlidableDismissal(
+                        child: SlidableDrawerDismissal(),
+                        onDismissed: (actionType) {
+                          try {
+                            setState(() {
+                              cartItem.removeAt(i);
+                              print('${cartItem[i].id} Dismissed');
+                            });
+                          } catch (e) {
+                            print('Error Dismissing');
+                          }
+                        },
+                      ),
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.25,
+                      direction: Axis.horizontal,
+                      actions: <Widget>[
+                        IconSlideAction(
+                          caption: 'Archive',
+                          color: Colors.blue,
+                          icon: Icons.archive,
+                          // onTap: () => _showSnackBar('Archive'),
                         ),
-                        actionPane: SlidableDrawerActionPane(),
-                        actionExtentRatio: 0.25,
-                        direction: Axis.horizontal,
-                        actions: <Widget>[
-                          IconSlideAction(
-                            caption: 'Archive',
-                            color: Colors.blue,
-                            icon: Icons.archive,
-                            // onTap: () => _showSnackBar('Archive'),
-                          ),
-                          IconSlideAction(
-                            caption: 'Share',
-                            color: Colors.indigo,
-                            icon: Icons.share,
-                            // onTap: () => _showSnackBar('Share'),
-                          ),
-                        ],
-                        secondaryActions: <Widget>[
-                          IconSlideAction(
-                            caption: 'More',
-                            color: Colors.black45,
-                            icon: Icons.more_horiz,
-                            // onTap: () => _showSnackBar('More'),
-                          ),
-                          IconSlideAction(
-                            caption: 'Delete',
-                            color: Colors.red,
-                            icon: Icons.delete,
-                            // onTap: () => _showSnackBar('Delete'),
-                          ),
-                        ],
+                        IconSlideAction(
+                          caption: 'Share',
+                          color: Colors.indigo,
+                          icon: Icons.share,
+                          // onTap: () => _showSnackBar('Share'),
+                        ),
+                      ],
+                      secondaryActions: <Widget>[
+                        IconSlideAction(
+                          caption: 'More',
+                          color: Colors.black45,
+                          icon: Icons.more_horiz,
+                          // onTap: () => _showSnackBar('More'),
+                        ),
+                        IconSlideAction(
+                          caption: 'Delete',
+                          color: Colors.red,
+                          icon: Icons.delete,
+                          // onTap: () => _showSnackBar('Delete'),
+                        ),
+                      ],
 
-                        child: Card(
-                          child: ListTile(
-                            title: Text('${cartItem[i].title}'),
-                            subtitle: Text('${cartItem[i].upc}'),
-                            trailing: FittedBox(
-                              child: ButtonBar(children: [
+                      child: Card(
+                        child: ListTile(
+                          title: Text('${cartItem[i].title}'),
+                          subtitle: Text('${cartItem[i].upc}'),
+                          trailing: FittedBox(
+                            child: ButtonBar(
+                              children: [
                                 IconButton(
                                     icon: Icon(Icons.remove_circle_outline),
                                     onPressed: null),
@@ -123,15 +124,16 @@ class _CartViewState extends State<CartView> {
                                 IconButton(
                                     icon: Icon(Icons.add_circle_outline),
                                     onPressed: null)
-                              ]),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

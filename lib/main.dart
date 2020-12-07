@@ -1,4 +1,5 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
+import 'package:barcode_scanner_v3/Provider/product_provider.dart';
 import 'package:barcode_scanner_v3/Wrapper.dart';
 import 'package:barcode_scanner_v3/Provider/AuthService.dart';
 import 'package:barcode_scanner_v3/views/cart_view.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AuthService>(
           create: (context) => AuthService(),
+        ),
+        ChangeNotifierProvider<ProductProvider>(
+          create: (context) => ProductProvider(),
         ),
       ],
       // create: (context) => CartProvider(),

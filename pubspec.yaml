@@ -31,7 +31,6 @@ dependencies:
   flutter_barcode_scanner: ^1.0.1
   http:
   provider:
-  convex_bottom_bar:
   flutter_signin_button: ^1.0.0
   google_fonts: ^1.1.0
   firebase_core: "0.5.0"

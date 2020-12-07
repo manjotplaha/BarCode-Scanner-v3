@@ -28,28 +28,28 @@ class Items {
   String category;
   int quantity;
   // ignore: non_constant_identifier_names
-  // double lowest_rec_price;
+  num lowest_rec_price;
   // String lowestRecPrice = lowest_rec_price.toString();
   // // ignore: non_constant_identifier_names
-  // double highest_rec_price;
+  num highest_rec_price;
 
-  Items(
-      {this.ean,
-      this.title,
-      this.description,
-      this.upc,
-      this.brand,
-      this.model,
-      this.color,
-      this.size,
-      this.category,
-      this.quantity
+  Items({
+    this.ean,
+    this.title,
+    this.description,
+    this.upc,
+    this.brand,
+    this.model,
+    this.color,
+    this.size,
+    this.category,
+    this.quantity,
 
-      // ignore: non_constant_identifier_names
-      // this.lowest_rec_price,
-      // ignore: non_constant_identifier_names
-      // this.highest_rec_price
-      });
+    // ignore: non_constant_identifier_names
+    this.lowest_rec_price,
+    // ignore: non_constant_identifier_names
+    this.highest_rec_price,
+  });
 
   factory Items.fromJson(Map<String, dynamic> parsedJson) {
     return Items(
@@ -63,8 +63,8 @@ class Items {
       color: parsedJson['color'] ?? '[null]',
       size: parsedJson['size'] ?? '[null]',
       category: parsedJson['category'] ?? '[null]',
-      // lowest_rec_price: parsedJson['lowest_rec_price'] ?? '[null]',
-      // highest_rec_price: parsedJson['highest_rec_price'] ?? '[null]',
+      lowest_rec_price: parsedJson['lowest_rec_price'] ?? '[null]',
+      highest_rec_price: parsedJson['highest_rec_price'] ?? '[null]',
     );
   }
 }

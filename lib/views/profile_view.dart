@@ -7,21 +7,21 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Colors.grey[900],
-        appBar: buildAppBar(context, 'User Profile'),
-        body: FutureBuilder(
-            future: Provider.of<AuthService>(context).getCurrentUser(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Padding(
-                  padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-                  child: UserProfileInfo(context, snapshot),
-                );
-              } else {
-                return CircularProgressIndicator();
-              }
-            }),
-        bottomNavigationBar: BottomNavBar());
+      // backgroundColor: Colors.grey[900],
+      appBar: buildAppBar(context, 'User Profile'),
+      body: FutureBuilder(
+          future: Provider.of<AuthService>(context).getCurrentUser(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Padding(
+                padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+                child: UserProfileInfo(context, snapshot),
+              );
+            } else {
+              return CircularProgressIndicator();
+            }
+          }),
+    );
   }
 }
 
