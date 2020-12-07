@@ -6,6 +6,7 @@ import 'package:barcode_scanner_v3/shared/widgets/bars.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -61,22 +62,55 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ImageCache().maximumSizeBytes = 10;
     return Scaffold(
       appBar: buildAppBar(context, 'BarCode Scanner'),
       body: Container(
         width: double.infinity,
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('Here Goes the Scannner'),
+              CarouselSlider(
+                options: CarouselOptions(
+                  height: 200,
+                  enlargeCenterPage: true,
+                  // autoPlay: true,
+                  initialPage: 1,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enableInfiniteScroll: false,
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                ),
+                items: [
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/open_sign.jpg'),
+                              fit: BoxFit.cover))),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/sale2.jpg'),fit: BoxFit.cover))),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/store.jpg'),fit: BoxFit.cover))),
+                ],
+              ),
+              Column(children:[Text('Scan a Barcode to get the Product Information'),
               RaisedButton(
                   onPressed: () {
                     scanBarcodeNormal();
                   },
                   child: Text("Start barcode scan")),
               Text('Scan result : $scanBarcode\n',
-                  style: TextStyle(fontSize: 20)),
+                  style: TextStyle(fontSize: 20)),])
+              
             ]),
       ),
     );

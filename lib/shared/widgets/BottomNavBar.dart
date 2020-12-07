@@ -25,6 +25,7 @@ class _BottomNavState extends State<BottomNav> {
         fixedColor: Colors.white70,
         unselectedItemColor: Colors.black54,
         currentIndex: currIndex,
+        elevation: 2,
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),

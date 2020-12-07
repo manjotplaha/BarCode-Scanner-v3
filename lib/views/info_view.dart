@@ -60,19 +60,19 @@ class Information extends StatelessWidget {
                   style: contentsStyling()),
               Text('UPC:  ${snapshot.data.items[0].upc}',
                   style: contentsStyling()),
-              SizedBox(
-                height: 15.0,
-              ),
-              // Text(
-              //     'Description:  ${snapshot.data.items[0].description}',
-              //     style: contentsStyling()),
-              // SizedBox(height: 15.0),
+              SizedBox(height: 15.0),
+              Text(
+                  'Highest Price Recorded:  \$${snapshot.data.items[0].highest_recorded_price}',
+                  style: contentsStyling()),
+              Text(
+                  'Lowest Price Recorded:  \$${snapshot.data.items[0].lowest_recorded_price}',
+                  style: contentsStyling()),
+              SizedBox(height: 15.0),
               Text(
                 'Category:  ${snapshot.data.items[0].category}',
                 textAlign: TextAlign.end,
                 style: contentsStyling(),
               ),
-
               ButtonBar(children: [
                 ChangeNotifierProvider(
                   create: (BuildContext context) {

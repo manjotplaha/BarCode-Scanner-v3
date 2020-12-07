@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 AppBar buildAppBar(BuildContext context, String pageTitle) {
   AuthService _auth = new AuthService();
   return AppBar(
+    backgroundColor: Colors.white70,
     title: Text(
       '$pageTitle',
       style: Theme.of(context).textTheme.headline6,
