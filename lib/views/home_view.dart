@@ -64,11 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     ImageCache().maximumSizeBytes = 10;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context, 'BarCode Scanner'),
       body: Container(
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CarouselSlider(
@@ -94,23 +94,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           image: DecorationImage(
-                              image: AssetImage('assets/images/sale2.jpg'),fit: BoxFit.cover))),
+                              image: AssetImage('assets/images/sale2.jpg'),
+                              fit: BoxFit.cover))),
                   Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           image: DecorationImage(
-                              image: AssetImage('assets/images/store.jpg'),fit: BoxFit.cover))),
+                              image: AssetImage('assets/images/store.jpg'),
+                              fit: BoxFit.cover))),
                 ],
               ),
-              Column(children:[Text('Scan a Barcode to get the Product Information'),
-              RaisedButton(
-                  onPressed: () {
-                    scanBarcodeNormal();
-                  },
-                  child: Text("Start barcode scan")),
-              Text('Scan result : $scanBarcode\n',
-                  style: TextStyle(fontSize: 20)),])
-              
+              Column(children: [
+                Text('Scan a Barcode to get the Product Information'),
+                RaisedButton(
+                    onPressed: () {
+                      scanBarcodeNormal();
+                    },
+                    child: Text("Start barcode scan")),
+                Text('Scan result : $scanBarcode\n',
+                    style: TextStyle(fontSize: 20)),
+              ])
             ]),
       ),
     );
