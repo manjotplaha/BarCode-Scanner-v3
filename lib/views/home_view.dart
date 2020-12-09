@@ -52,8 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future _modalBottomSheetInformation() {
     return showModalBottomSheet(
+        isScrollControlled: true,
+        enableDrag: true,
         context: context,
-        builder: (context) => Information(scanBarcode),
+        builder: (context) => Container(
+            height: MediaQuery.of(context).size.height -
+                (MediaQuery.of(context).size.height / 3),
+            child: Information(scanBarcode)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

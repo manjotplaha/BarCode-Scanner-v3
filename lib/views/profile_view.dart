@@ -124,10 +124,10 @@ class UserProfileInfo extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
                 child: Divider(height: 20.0, color: Colors.grey[750]),
               ),
-              buildRow('Customer Care'),
-              buildRow('Terms & Conditions'),
-              buildRow('Who are we'),
-              buildRow('We Respect you Privacy'),
+              buildRow('Customer Care', '/customerCare'),
+              buildRow('Terms & Conditions', '/t&c'),
+              buildRow('Who are we', '/aboutUs'),
+              buildRow('We Respect you Privacy', '/privacy'),
               Container(
                 height: 40,
                 color: Colors.black26,
@@ -142,12 +142,18 @@ class UserProfileInfo extends StatelessWidget {
     );
   }
 
-  Padding buildRow(String serviceType) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text('$serviceType'), Icon(Icons.keyboard_arrow_right)],
+  GestureDetector buildRow(String serviceType, String route) {
+    return GestureDetector(
+      onTap: () {
+        // print('pushesd')
+        Navigator.pushNamed(context, route);
+      },
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text('$serviceType'), Icon(Icons.keyboard_arrow_right)],
+        ),
       ),
     );
   }

@@ -17,6 +17,7 @@ class Article {
 }
 
 class Items {
+  List images;
   String ean;
   String title;
   String description;
@@ -34,6 +35,7 @@ class Items {
   num highest_recorded_price;
 
   Items({
+    this.images,
     this.ean,
     this.title,
     this.description,
@@ -54,6 +56,7 @@ class Items {
   factory Items.fromJson(Map<String, dynamic> parsedJson) {
     return Items(
       quantity: 1,
+      images: parsedJson['images'] ?? '[null]',
       ean: parsedJson['ean'] ?? '[null]',
       title: parsedJson['title'] ?? '[null]',
       description: parsedJson['description'] ?? '[null]',

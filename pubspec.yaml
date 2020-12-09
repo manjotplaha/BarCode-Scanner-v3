@@ -42,8 +42,9 @@ dependencies:
   shimmer: ^1.1.1
   package_info: ^0.4.0+16
   carousel_slider: ^2.3.1
-  stripe_payment: ^1.0.9
-  progress_dialog: ^1.2.2
+  # stripe_payment: ^1.0.9
+  # progress_dialog: ^1.2.2
+  square_in_app_payments: 
 
   # firebase_analytics:
   # firebase_crashlytics:

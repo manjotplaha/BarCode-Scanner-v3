@@ -21,7 +21,7 @@ class Information extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      // height: 350,
       child: FutureBuilder<Article>(
         future: lookUp(barCode),
         builder: (BuildContext context, AsyncSnapshot<Article> snapshot) {
@@ -37,93 +37,105 @@ class Information extends StatelessWidget {
     );
   }
 
-  Container buildInfoView(
-      AsyncSnapshot<Article> snapshot, BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-        width: double.infinity,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${snapshot.data.items[0].title}',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Quicksand'),
-              ),
-              SizedBox(height: 5.0),
-              Text('Brand:  ${snapshot.data.items[0].brand}',
-                  style: contentsStyling()),
-              Text('Color:  ${snapshot.data.items[0].color}',
-                  style: contentsStyling()),
-              Text('UPC:  ${snapshot.data.items[0].upc}',
-                  style: contentsStyling()),
-              SizedBox(height: 15.0),
-              Text(
-                  'Highest Price Recorded:  \$${snapshot.data.items[0].highest_recorded_price}',
-                  style: contentsStyling()),
-              Text(
-                  'Lowest Price Recorded:  \$${snapshot.data.items[0].lowest_recorded_price}',
-                  style: contentsStyling()),
-              SizedBox(height: 15.0),
-              Text(
-                'Category:  ${snapshot.data.items[0].category}',
-                textAlign: TextAlign.end,
-                style: contentsStyling(),
-              ),
-              ButtonBar(children: [
-                ChangeNotifierProvider(
-                  create: (BuildContext context) {
-                    CartProvider();
-                  },
-                  child: RaisedButton(
-                    onPressed: () async {
-                      // Navigator.pushNamed(context, '/cart');
-                      try {
-                        Navigator.of(context)
-                            .push(methodName.buildAnimatedRoute(CartView()));
-                        Provider.of<CartProvider>(context, listen: false)
-                            .add(snapshot.data);
-                      } catch (error) {
-                        await showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text('An Error Occured'),
-                            content: Text('Somethhing Went Wrong !'),
-                            actions: [
-                              FlatButton(
-                                  onPressed: Navigator.of(ctx).pop, child: null)
-                            ],
-                          ),
-                        );
-                      }
-                    },
-                    color: Colors.red,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(Icons.shopping_cart),
-                        Text(
-                          'Add To Cart',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+  Padding buildInfoView(AsyncSnapshot<Article> snapshot, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+      child: ListView(children: [
+        Container(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+            width: double.infinity,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${snapshot.data.items[0].title}',
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Quicksand'),
                   ),
-                ),
-              ])
-            ]));
+                  SizedBox(height: 5.0),
+                  Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  '${snapshot.data.items[0].images[0]}')))),
+                  // NetworkImage('snapshot.data.items[0].images'),
+                  Text('Brand:  ${snapshot.data.items[0].brand}',
+                      style: contentsStyling()),
+                  Text('Color:  ${snapshot.data.items[0].color}',
+                      style: contentsStyling()),
+                  Text('UPC:  ${snapshot.data.items[0].upc}',
+                      style: contentsStyling()),
+                  SizedBox(height: 15.0),
+                  Text(
+                      'Highest Price Recorded:  \$${snapshot.data.items[0].highest_recorded_price}',
+                      style: contentsStyling()),
+                  Text(
+                      'Lowest Price Recorded:  \$${snapshot.data.items[0].lowest_recorded_price}',
+                      style: contentsStyling()),
+                  SizedBox(height: 15.0),
+                  Text(
+                    'Category:  ${snapshot.data.items[0].category}',
+                    textAlign: TextAlign.end,
+                    style: contentsStyling(),
+                  ),
+                  ButtonBar(children: [
+                    ChangeNotifierProvider(
+                      create: (BuildContext context) {
+                        CartProvider();
+                      },
+                      child: RaisedButton(
+                        onPressed: () async {
+                          // Navigator.pushNamed(context, '/cart');
+                          try {
+                            Navigator.of(context).push(
+                                methodName.buildAnimatedRoute(CartView()));
+                            Provider.of<CartProvider>(context, listen: false)
+                                .add(snapshot.data);
+                          } catch (error) {
+                            await showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('An Error Occured'),
+                                content: Text('Somethhing Went Wrong !'),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: Navigator.of(ctx).pop,
+                                      child: null)
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                        color: Colors.red,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(Icons.shopping_cart),
+                            Text(
+                              'Add To Cart',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ])
+                ])),
+      ]),
+    );
   }
 
   TextStyle contentsStyling() {
-    return TextStyle(fontSize: 13.5, color: Colors.black.withOpacity(0.6));
+    return TextStyle(fontSize: 13.5, color: Colors.black87);
   }
 }

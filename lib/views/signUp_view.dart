@@ -1,6 +1,6 @@
 import 'package:barcode_scanner_v3/Provider/AuthService.dart';
 import 'package:barcode_scanner_v3/shared/Animator&Decorations.dart';
-import 'package:barcode_scanner_v3/shared/widgets/login_widgets.dart';
+import 'package:barcode_scanner_v3/shared/widgets/login_widgets.dart' as btn;
 import 'package:barcode_scanner_v3/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -138,14 +138,14 @@ class _SignUpState extends State<SignUp> {
                   '-OR-',
                   style: TextStyle(color: textColor),
                 ),
-                GoogleSignInButton(),
+                btn.GoogleSignInButton(),
                 SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
                     'Already have an Account ? ',
                     style: TextStyle(color: textColor),
                   ),
-                  TextButton(title: 'Sign In', weight: FontWeight.bold),
+                  btn.TextButton(title: 'Sign In', weight: FontWeight.bold),
                 ])
               ],
             ),

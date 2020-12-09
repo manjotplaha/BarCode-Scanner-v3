@@ -1,8 +1,7 @@
 import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
-import 'package:barcode_scanner_v3/services/payment_services.dart';
+import 'package:barcode_scanner_v3/services/square_payments.dart';
 import 'package:barcode_scanner_v3/shared/widgets/bars.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -34,20 +33,6 @@ class _CartViewState extends State<CartView> {
   Future<void> _refreshCart(BuildContext context) async {
     await Provider.of<CartProvider>(context, listen: false)
         .fetchAndSetProducts();
-  }
-
-  payViaNewCard(BuildContext context) async {
-    ProgressDialog dialog = new ProgressDialog(context);
-    dialog.style(message: 'Please wait...');
-    await dialog.show();
-    var response =
-        await StripeService.payWithNewCard(amount: '15000', currency: 'USD');
-    await dialog.hide();
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(response.message),
-      duration:
-          new Duration(milliseconds: response.success == true ? 1200 : 3000),
-    ));
   }
 
   @override
@@ -163,7 +148,7 @@ class _CartViewState extends State<CartView> {
                               padding: const EdgeInsets.all(0),
                               child: GestureDetector(
                                 onTap: () {
-                                  // Todo
+                                  Navigator.pushNamed(context, '/coupons');
                                 },
                                 child: Card(
                                   child: Container(
@@ -214,7 +199,8 @@ class _CartViewState extends State<CartView> {
                                     TableCell(
                                       child: GestureDetector(
                                           onTap: () {
-                                            // Todo
+                                            Navigator.pushNamed(
+                                                context, '/coupons');
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.fromLTRB(
@@ -254,8 +240,7 @@ class _CartViewState extends State<CartView> {
                                     ])),
                                 MaterialButton(
                                   onPressed: () {
-                                    // StripePayment.createSourceWithParams(SourceParams(Source))
-                                    payViaNewCard(context);
+                                    payment();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(

@@ -2,9 +2,14 @@ import 'package:barcode_scanner_v3/Provider/cart_provider.dart';
 import 'package:barcode_scanner_v3/Provider/product_provider.dart';
 import 'package:barcode_scanner_v3/Wrapper.dart';
 import 'package:barcode_scanner_v3/Provider/AuthService.dart';
+import 'package:barcode_scanner_v3/views/aboutUs.dart';
 import 'package:barcode_scanner_v3/views/cart_view.dart';
+import 'package:barcode_scanner_v3/views/coupons_view.dart';
+import 'package:barcode_scanner_v3/views/customer_care_view.dart';
 import 'package:barcode_scanner_v3/views/first_view.dart';
 import 'package:barcode_scanner_v3/views/home_view.dart';
+import 'package:barcode_scanner_v3/views/privacy_para.dart';
+import 'package:barcode_scanner_v3/views/t&c_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; //Orinetation Control
@@ -67,7 +72,12 @@ class MyApp extends StatelessWidget {
           '/': (context) => Wrapper(),
           '/firstPage': (context) => FirstPage(),
           '/home': (context) => MyHomePage(),
-          '/cart': (context) => CartView()
+          '/cart': (context) => CartView(),
+          '/coupons': (context) => CouponsView(),
+          '/customerCare': (context) => CustomerCareView(),
+          '/t&c': (context) => TermsCondView(),
+          '/aboutUs': (context) => AboutUsView(),
+          '/privacy': (context) => PrivacyInfoView(),
         },
       ),
     );
