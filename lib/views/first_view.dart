@@ -43,7 +43,8 @@ class FirstPage extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  // SizedBox(height: 150),
+                  SizedBox(height: 50),
                   Container(
                       width: 800,
                       height: 40,

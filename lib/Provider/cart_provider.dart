@@ -21,6 +21,7 @@ class CartProvider extends ChangeNotifier {
           'upc': item.items[0].upc,
           'brand': item.items[0].brand,
           'quantity': item.items[0].quantity,
+          // 'cost': item.items[0].highest_recorded_price
         }),
       );
       // _cartArticles.add(item);
@@ -52,6 +53,7 @@ class CartProvider extends ChangeNotifier {
               upc: prodData['upc'],
               brand: prodData['brand'],
               quantity: prodData['quantity'],
+              // price: prodData['cost'],
             ),
           );
         },

@@ -57,7 +57,7 @@ class Information extends StatelessWidget {
                   ),
                   SizedBox(height: 5.0),
                   Container(
-                      height: 100,
+                      height: 150,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: NetworkImage(

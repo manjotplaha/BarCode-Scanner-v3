@@ -123,7 +123,7 @@ class _CartViewState extends State<CartView> {
                                   child: Card(
                                     child: ListTile(
                                       title: Text('${cartItem[i].title}'),
-                                      subtitle: Text('${cartItem[i].upc}'),
+                                      subtitle: Text('${cartItem[i].brand}'),
                                       trailing: FittedBox(
                                         child: ButtonBar(
                                           children: [
@@ -224,30 +224,34 @@ class _CartViewState extends State<CartView> {
                             ButtonBar(
                               buttonHeight: 20.0,
                               children: [
-                                FlatButton(
-                                    onPressed: null,
-                                    child: Column(children: [
-                                      Text('\$ 70.0',
+                                Expanded(
+                                  child: FlatButton(
+                                      onPressed: null,
+                                      child: Column(children: [
+                                        Text('\$ 70.0',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black54,
+                                                fontSize: 18.0)),
+                                        Text(
+                                          'View Order Summary',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black54,
-                                              fontSize: 18.0)),
-                                      Text(
-                                        'View Order Summary',
-                                        style:
-                                            TextStyle(color: Colors.teal[400]),
-                                      )
-                                    ])),
-                                MaterialButton(
-                                  onPressed: () {
-                                    payment();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 10.0, 20.0, 10.0),
-                                    child: Text('PROCEED TO PAY'),
+                                              color: Colors.teal[400]),
+                                        )
+                                      ])),
+                                ),
+                                Expanded(
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      payment();
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 10.0, 20.0, 10.0),
+                                      child: Text('PROCEED TO PAY'),
+                                    ),
+                                    color: Colors.amber,
                                   ),
-                                  color: Colors.amber,
                                 )
                               ],
                             )

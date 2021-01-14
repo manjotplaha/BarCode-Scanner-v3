@@ -115,7 +115,6 @@ class ProductProvider with ChangeNotifier {
         print('query exists on the database');
         querySnapshot.docs.forEach(
           (doc) {
-            // print('${doc["title"]}, ${doc['option']}');
             candyProductsCatalogue.add(
               ProductProvider(
                 title: doc['title'],

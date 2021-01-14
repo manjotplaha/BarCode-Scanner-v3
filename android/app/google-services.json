@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "280123204821-dcshp1vl5d298j3mkqe7ok0ffjq6p2qj.apps.googleusercontent.com",
+          "client_id": "280123204821-64vk3kofkrmnlbdirmgoaa0sfnrkq38t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.plaha.barcode_scanner_v3",
-            "certificate_hash": "0b233acf8e1a775ac054ed44ccf8252c49b0fea6"
+            "certificate_hash": "d1481f5115027e1043a17235ef1051bb4b3708ff"
           }
         },
         {
