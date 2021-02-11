@@ -243,12 +243,12 @@ class _CartViewState extends State<CartView> {
                                 Expanded(
                                   child: MaterialButton(
                                     onPressed: () {
-                                      payment();
+                                      // payment();
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.fromLTRB(
                                           20, 10.0, 20.0, 10.0),
-                                      child: Text('PROCEED TO PAY'),
+                                      child: Text('PROCEED TO PAY- Disabled'),
                                     ),
                                     color: Colors.amber,
                                   ),

@@ -162,7 +162,12 @@ class UserProfileInfo extends StatelessWidget {
     if (snapshot.data.isAnonymous == true) {
       return AssetImage('assets/images/anonymous-user.png');
     } else if (snapshot.data.isAnonymous == false) {
-      return NetworkImage(snapshot.data.photoURL);
+      if (snapshot.data.photoURL == null) {
+        return AssetImage('assets/images/anonymous-user.png');
+      } else {
+        return NetworkImage(snapshot.data.photoURL);
+      }
+      // return NetworkImage(snapshot.data.photoURL);
     }
   }
 }
